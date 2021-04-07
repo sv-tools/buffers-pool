@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
 	bufferspool "github.com/sv-tools/buffers-pool"
 )
 
