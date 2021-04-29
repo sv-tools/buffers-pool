@@ -68,3 +68,8 @@ func main() {
     }
 }
 ```
+
+
+## License
+
+MIT licensed. See the bundled [LICENSE](LICENSE) file for more details.
