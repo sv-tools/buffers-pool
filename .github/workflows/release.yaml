@@ -64,6 +64,6 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist --config .github/.goreleaser-lib.yml
+          args: release --rm-dist --config .github/goreleaser-lib.yml
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
