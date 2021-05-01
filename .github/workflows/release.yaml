@@ -3,6 +3,9 @@ name: "New Release"
 on:
   milestone:
     types: [closed]
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 env:
   GO: 1.16
@@ -42,3 +45,25 @@ jobs:
           title: Next
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+  release-lib:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_CLI_EXPERIMENTAL: "enabled"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GO }}
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v2
+        with:
+          version: latest
+          args: release --rm-dist --config .github/.goreleaser-lib.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
