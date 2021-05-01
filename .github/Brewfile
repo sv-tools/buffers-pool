@@ -2,6 +2,7 @@ tap "golangci/tap"
 tap "kyoh86/tap"
 tap "sonatype-nexus-community/nancy-tap"
 tap "sv-tools/apps"
+tap "goreleaser/tap"
 
 # Fast linters runner for Go.
 brew "golangci/tap/golangci-lint"
@@ -11,3 +12,5 @@ brew "kyoh86/tap/richgo"
 brew "sonatype-nexus-community/nancy-tap/nancy"
 # bumptag is a tool to increment a version and to create a git tag with an annotation.
 brew "sv-tools/apps/bumptag"
+# Deliver Go binaries as fast and easily as possible
+brew "goreleaser/tap/goreleaser"
