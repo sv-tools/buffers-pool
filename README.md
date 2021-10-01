@@ -7,7 +7,7 @@
 The small library with an implementation of Buffer Pool.
 The library was created to avoid repeating this code.
 
-Here is a good article how to use implement and properly use the Buffer Pools: https://www.captaincodeman.com/2017/06/02/golang-buffer-pool-gotcha
+Here is a good article how to implement and properly use the Buffer Pools: https://www.captaincodeman.com/2017/06/02/golang-buffer-pool-gotcha
 
 ## Usage
 
@@ -16,14 +16,14 @@ package main
 
 import (
 	"fmt"
-    "sync"
+	"sync"
 	"text/template"
 
 	buffferspool "github.com/sv-tools/buffers-pool"
 )
 
-func render(template string, data interface{}) (string, error) {
-	tmpl, err := template.New("test").Parse(template)
+func render(tmpl string, data interface{}) (string, error) {
+	tp, err := template.New("test").Parse(tmpl)
 	if err != nil {
 		return "", err
 	}
@@ -31,7 +31,7 @@ func render(template string, data interface{}) (string, error) {
 	buf := buffferspool.Get()
 	defer buffferspool.Put(buf)
 
-	if err := tmpl.Execute(buf, data); err != nil {
+	if err := tp.Execute(buf, data); err != nil {
 		return "", err
 	}
 
@@ -39,7 +39,7 @@ func render(template string, data interface{}) (string, error) {
 }
 
 func main() {
-    var template string
+    var tmpl string
     var data []interface{}
     // ... load template and data to variables ...
 
@@ -49,7 +49,7 @@ func main() {
         wg.Add(1)
         go func(data interface{}) {
             defer wg.Done()
-            val, err := render(data)
+            val, err := render(tmpl, data)
             if err != nil {
                 res <- err.Error()
                 return
@@ -68,7 +68,6 @@ func main() {
     }
 }
 ```
-
 
 ## License
 
