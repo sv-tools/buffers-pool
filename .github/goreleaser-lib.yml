@@ -1,9 +1,0 @@
-project_name: buffers-pool
-
-release:
-  github:
-    owner: sv-tools
-    name: buffers-pool
-
-builds:
-  - skip: true
