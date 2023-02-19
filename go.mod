@@ -1,6 +1,6 @@
 module github.com/sv-tools/buffers-pool
 
-go 1.17
+go 1.18
 
 require github.com/stretchr/testify v1.8.1
 
