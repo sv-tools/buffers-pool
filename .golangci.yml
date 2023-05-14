@@ -74,3 +74,8 @@ issues:
   exclude-use-default: false
   exclude:
     - should have a package comment
+  exclude-rules:
+    - linters:
+        - gosec
+      path: pool_test\.go
+      text: "G103: Use of unsafe calls should be audited"

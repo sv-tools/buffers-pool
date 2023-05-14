@@ -9,6 +9,10 @@ The library was created to avoid repeating this code.
 
 Here is a good article how to implement and properly use the Buffer Pools: https://www.captaincodeman.com/2017/06/02/golang-buffer-pool-gotcha
 
+Check the [tests](pool_test.go) file for some examples.
+
+PS: The package is stable and the new releases are not expected. 
+
 ## Usage
 
 ```go
@@ -35,6 +39,7 @@ func render(tmpl string, data interface{}) (string, error) {
 		return "", err
 	}
 
+	// the usage of buf.String is safe 
 	return buf.String(), nil
 }
 
