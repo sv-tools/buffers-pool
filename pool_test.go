@@ -13,7 +13,7 @@ import (
 func TestGlobalPool(t *testing.T) {
 	b1 := bufferspool.Get()
 	b2 := bufferspool.Get()
-	require.NotEqual(t, unsafe.Pointer(b1), unsafe.Pointer(b2))
+	require.NotEqual(t, unsafe.Pointer(b1), unsafe.Pointer(b2)) //nolint: gosec
 
 	b1.WriteString("foo")
 	bufferspool.Put(b1)
@@ -25,7 +25,7 @@ func TestCustomPool(t *testing.T) {
 	p := bufferspool.New()
 	b1 := p.Get()
 	b2 := p.Get()
-	require.NotEqual(t, unsafe.Pointer(b1), unsafe.Pointer(b2))
+	require.NotEqual(t, unsafe.Pointer(b1), unsafe.Pointer(b2)) //nolint: gosec
 
 	b1.WriteString("foo")
 	p.Put(b1)
@@ -54,7 +54,7 @@ func TestSafety(t *testing.T) {
 	b2 := p.Get()
 	defer p.Put(b2)
 
-	require.Equal(t, unsafe.Pointer(b1), unsafe.Pointer(b2))
+	require.Equal(t, unsafe.Pointer(b1), unsafe.Pointer(b2)) //nolint: gosec
 	require.Empty(t, b2.Bytes())
 
 	b2.WriteString("bar")
