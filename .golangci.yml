@@ -5,16 +5,14 @@ linters:
   enable: # keep in ascending order
     - asciicheck
     - bodyclose
+    - copyloopvar
     - dupl
     - durationcheck
+    - err113
     - exhaustive
-    - exportloopref
     - gci
-    - gocognit
     - goconst
     - gocritic
-    - gocyclo
-    - goerr113
     - gofumpt
     - goprintffuncname
     - gosec
@@ -43,7 +41,10 @@ linters-settings:
     disable:
       - shadow
   gci:
-    local-prefixes: github.com/sv-tools/buffers-pool
+    sections:
+      - standard
+      - default
+      - prefix(github.com/sv-tools/buffers-pool)
   gocognit:
     min-complexity: 15
   gocyclo:
@@ -74,8 +75,3 @@ issues:
   exclude-use-default: false
   exclude:
     - should have a package comment
-  exclude-rules:
-    - linters:
-        - gosec
-      path: pool_test\.go
-      text: "G103: Use of unsafe calls should be audited"
