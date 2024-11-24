@@ -33,7 +33,7 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@ea9e4e37992a54ee68a9622e985e60c8e8f12d9f # v3.27.4
 
-  UnitTests:
+  UnitTestJob:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -58,6 +58,12 @@ jobs:
         uses: codecov/codecov-action@015f24e6818733317a2da2edd6290ab26238649a # v5.0.7
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  UnitTests:
+    needs: UnitTestJob
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Unit Tests Passed"
 
   GolangCI-Lint:
     runs-on: ubuntu-latest
