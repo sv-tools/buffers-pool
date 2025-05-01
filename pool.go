@@ -14,7 +14,7 @@ func init() {
 // Pool is an interface to work with the Buffers Pool
 type Pool interface {
 	Get() *bytes.Buffer
-	Put(*bytes.Buffer)
+	Put(buf *bytes.Buffer)
 }
 
 type pool struct {

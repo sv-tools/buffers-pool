@@ -6,11 +6,12 @@ import (
 	"unsafe"
 
 	"github.com/stretchr/testify/require"
-
 	bufferspool "github.com/sv-tools/buffers-pool"
 )
 
 func TestGlobalPool(t *testing.T) {
+	t.Parallel()
+
 	b1 := bufferspool.Get()
 	b2 := bufferspool.Get()
 	require.NotEqual(t, unsafe.Pointer(b1), unsafe.Pointer(b2)) //nolint: gosec
@@ -22,6 +23,8 @@ func TestGlobalPool(t *testing.T) {
 }
 
 func TestCustomPool(t *testing.T) {
+	t.Parallel()
+
 	p := bufferspool.New()
 	b1 := p.Get()
 	b2 := p.Get()
@@ -34,6 +37,8 @@ func TestCustomPool(t *testing.T) {
 }
 
 func TestSafety(t *testing.T) {
+	t.Parallel()
+
 	p := bufferspool.New()
 	b1 := p.Get()
 	b1.WriteString("foo42")
@@ -48,7 +53,7 @@ func TestSafety(t *testing.T) {
 
 	// put the same buffer to the poll several times to increase the chance that the same object will be returned
 	// this is the only way to test the Pools if we need already used object
-	for i := 0; i < 10; i++ {
+	for range 10 {
 		p.Put(b1)
 	}
 	b2 := p.Get()
