@@ -13,8 +13,13 @@ func init() {
 
 // Pool is an interface to work with the Buffers Pool
 type Pool interface {
+	// Get returns a buffer from the pool or creates a new one
 	Get() *bytes.Buffer
+	// Put resets and puts back a given buffer to the pool
 	Put(buf *bytes.Buffer)
+	// Do executes a function with a buffer from the pool.
+	// The buffer will be put back to the pool after the function is executed.
+	Do(f func(b *bytes.Buffer))
 }
 
 type pool struct {
@@ -51,4 +56,16 @@ func Put(buf *bytes.Buffer) {
 func (p *pool) Put(buf *bytes.Buffer) {
 	buf.Reset()
 	p.pool.Put(buf)
+}
+
+// Do executes a function with a buffer from the pool.
+// The buffer will be put back to the pool after the function is executed.
+func Do(f func(b *bytes.Buffer)) {
+	globalPool.Do(f)
+}
+
+func (p *pool) Do(f func(b *bytes.Buffer)) {
+	buf := p.Get()
+	defer p.Put(buf)
+	f(buf)
 }
