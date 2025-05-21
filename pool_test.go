@@ -1,6 +1,7 @@
 package bufferspool_test
 
 import (
+	"bytes"
 	"io"
 	"testing"
 	"unsafe"
@@ -20,6 +21,12 @@ func TestGlobalPool(t *testing.T) {
 	bufferspool.Put(b1)
 	b2 = bufferspool.Get()
 	require.Zero(t, b2.Len())
+
+	bufferspool.Do(func(b *bytes.Buffer) {
+		require.Zero(t, b.Len())
+		b.WriteString("foo")
+		require.Equal(t, "foo", b.String())
+	})
 }
 
 func TestCustomPool(t *testing.T) {
@@ -34,6 +41,12 @@ func TestCustomPool(t *testing.T) {
 	p.Put(b1)
 	b2 = p.Get()
 	require.Zero(t, b2.Len())
+
+	p.Do(func(b *bytes.Buffer) {
+		require.Zero(t, b.Len())
+		b.WriteString("foo")
+		require.Equal(t, "foo", b.String())
+	})
 }
 
 func TestSafety(t *testing.T) {
