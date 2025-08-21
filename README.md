@@ -5,7 +5,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/sv-tools/buffers-pool?style=flat)](https://github.com/sv-tools/buffers-pool/releases)
 
 > [!IMPORTANT]
-> Archived, becasue the package is stable and the new releases are not expected.
+> Archived, because the package is stable and the new releases are not expected.
 > Feel free to copy the implementation directly to your code, instead of using it as a dependency.
 
 The small library with an implementation of Buffer Pool.
