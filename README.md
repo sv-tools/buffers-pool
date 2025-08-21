@@ -4,14 +4,16 @@
 [![codecov](https://codecov.io/gh/sv-tools/buffers-pool/branch/main/graph/badge.svg?token=0XVOTDR1CW)](https://codecov.io/gh/sv-tools/buffers-pool)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/sv-tools/buffers-pool?style=flat)](https://github.com/sv-tools/buffers-pool/releases)
 
+[!IMPORTANT]
+Archived becasue the package is stable and the new releases are not expected.
+Feel free to copy the implementation directly to your code, instead of using it as a dependency.
+
 The small library with an implementation of Buffer Pool.
 The library was created to avoid repeating this code.
 
 Here is a good article how to implement and properly use the Buffer Pools: https://www.captaincodeman.com/2017/06/02/golang-buffer-pool-gotcha
 
 Check the [tests](pool_test.go) file for some examples.
-
-PS: The package is stable and the new releases are not expected. 
 
 ## Usage
 
